@@ -19,35 +19,44 @@ This project implements the Monte Carlo Tree Search (MCTS) algorithm for solving
 ## Development Commands
 
 ```bash
-# Activate conda environment (use appropriate env or base)
-conda activate base
+# Run the main MCTS demo (with visualization)
+conda run -n base python main.py
 
-# Run the main MCTS implementation
-python main.py
+# Run without visualization
+conda run -n base python main.py --no-visualize
 
-# Run with visualization
-python main.py --visualize
+# Custom map configuration
+conda run -n base python main.py --size 50 --density 0.3 --iterations 10000
 
-# Run comparison tests
-python benchmark.py
+# Run performance benchmark
+conda run -n base python main.py --benchmark
+
+# Show MCTS search animation
+conda run -n base python main.py --animation
+
+# Save result figure
+conda run -n base python main.py --save
 ```
 
 ## Architecture
 
 ```
 MCTS/
-├── main.py              # Entry point
+├── main.py              # Entry point with CLI arguments
+├── benchmark.py         # Performance comparison tests
+├── requirements.txt     # Python dependencies
 ├── mcts/
-│   ├── node.py          # MCTS tree node implementation
-│   ├── tree.py          # MCTS tree with selection, expansion, simulation, backpropagation
-│   └── policy.py        # Selection and rollout policies (UCB1, random)
+│   ├── __init__.py
+│   ├── node.py          # MCTSNode class with UCB1, statistics
+│   └── tree.py          # MCTSPathFinder with select/expand/simulate/backprop
 ├── environment/
-│   ├── grid.py          # 2D grid map generation with obstacles
-│   └── visualizer.py    # Path and tree visualization
-├── algorithms/
-│   ├── astar.py         # A* algorithm for comparison
-│   └── dijkstra.py      # Dijkstra algorithm for comparison
-└── benchmark.py         # Performance comparison tests
+│   ├── __init__.py
+│   ├── grid.py          # GridMap class for 2D grid generation
+│   └── visualizer.py    # PathVisualizer for tree and path display
+└── algorithms/
+    ├── __init__.py
+    ├── astar.py         # A* algorithm for comparison
+    └── dijkstra.py      # Dijkstra algorithm for comparison
 ```
 
 ## Key MCTS Concepts
