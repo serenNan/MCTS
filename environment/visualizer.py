@@ -3,6 +3,7 @@
 动态展示MCTS搜索树的生长过程和最终路径
 """
 
+import platform
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.animation as animation
@@ -11,6 +12,16 @@ import numpy as np
 from typing import List, Tuple, Optional, Dict
 from environment.grid import GridMap
 from mcts.node import MCTSNode
+
+# 跨平台中文字体设置
+system = platform.system()
+if system == 'Windows':
+    plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'SimSun']
+elif system == 'Darwin':  # macOS
+    plt.rcParams['font.sans-serif'] = ['PingFang SC', 'Heiti SC', 'STHeiti']
+else:  # Linux
+    plt.rcParams['font.sans-serif'] = ['LXGW WenKai', 'Noto Serif CJK SC', 'WenQuanYi Micro Hei', 'DejaVu Sans']
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
 
 class PathVisualizer:

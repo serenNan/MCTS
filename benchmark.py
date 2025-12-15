@@ -4,10 +4,21 @@
 """
 
 import time
+import platform
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Dict, Tuple
 from tabulate import tabulate
+
+# 跨平台中文字体设置
+system = platform.system()
+if system == 'Windows':
+    plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'SimSun']
+elif system == 'Darwin':  # macOS
+    plt.rcParams['font.sans-serif'] = ['PingFang SC', 'Heiti SC', 'STHeiti']
+else:  # Linux
+    plt.rcParams['font.sans-serif'] = ['LXGW WenKai', 'Noto Serif CJK SC', 'WenQuanYi Micro Hei', 'DejaVu Sans']
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
 from environment.grid import GridMap
 from mcts.tree import MCTSPathFinder
